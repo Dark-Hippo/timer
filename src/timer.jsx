@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 const Timer = () => {
   const startTime = 5;
+  const step = 1;
   const STATE = {
     RUNNING: 'running',
     PAUSED: 'paused',
@@ -15,9 +16,9 @@ const Timer = () => {
   useEffect(() => {
     const runningTimer = setTimeout(() => {
       if (timer > 0) {
-        setTimer(timer - 1);
+        setTimer(timer - step);
       }
-    }, 1000);
+    }, step * 1000);
 
     return () => clearTimeout(runningTimer);
   }, [timer]);
