@@ -27,10 +27,24 @@ const Timer = () => {
     setTimer(startTime);
   };
 
+  const pauseButtonClicked = () => {
+    if (state === STATE.RUNNING) {
+      pauseTimer();
+    } else {
+      resumeTimer();
+    }
+  };
+
   const pauseTimer = () => {
     setState(STATE.PAUSED);
     setRemainingTime(timer);
     setTimer(0);
+  };
+
+  const resumeTimer = () => {
+    setState(STATE.RUNNING);
+    setTimer(remainingTime);
+    setRemainingTime(0);
   };
 
   const timerDisplay = () => {
@@ -46,7 +60,10 @@ const Timer = () => {
       {timerDisplay()}
       <br />
       <button onClick={resetTimer}>Reset</button>
-      <button onClick={pauseTimer} style={{ display: state === STATE.STOPPED ? 'none' : 'flex' }}>
+      <button
+        onClick={pauseButtonClicked}
+        style={{ display: state === STATE.STOPPED ? 'none' : 'flex' }}
+      >
         {state === STATE.RUNNING ? 'Pause' : 'Resume'}
       </button>
       <h2>{state.toString()}</h2>
