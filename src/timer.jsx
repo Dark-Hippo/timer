@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 const Timer = () => {
   const startTime = 5;
@@ -6,21 +6,27 @@ const Timer = () => {
 
   useEffect(() => {
     const runningTimer = setTimeout(() => {
-      if(timer > 0) {
-        setTimer(timer-1);
+      if (timer > 0) {
+        setTimer(timer - 1);
       }
     }, 1000);
 
     return clearTimeout(runningTimer);
-  }, [timer])
-  
+  }, [timer]);
+
   return (
     <>
       {timer}
       <br />
-      <button onClick={() => {setTimer(startTime)}}>Reset</button>
+      <button
+        onClick={() => {
+          setTimer(startTime);
+        }}
+      >
+        Reset
+      </button>
     </>
-  )
-}
+  );
+};
 
 export default Timer;
