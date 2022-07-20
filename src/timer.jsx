@@ -11,7 +11,7 @@ const Timer = () => {
       }
     }, 1000);
 
-    return clearTimeout(runningTimer);
+    return () => clearTimeout(runningTimer);
   }, [timer]);
 
   return (
