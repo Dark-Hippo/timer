@@ -18,13 +18,15 @@ const Timer = ({ duration }) => {
       if (timer > 0) {
         setTimer(timer - step);
       } else {
-        setTimer(0);
-        setState(STATE.STOPPED);
+        if (state !== STATE.PAUSED) {
+          setTimer(0);
+          setState(STATE.STOPPED);
+        }
       }
     }, step * 1000);
 
     return () => clearTimeout(runningTimer);
-  }, [timer, STATE.STOPPED]);
+  }, [timer, STATE.STOPPED, STATE.PAUSED, state]);
 
   const resetTimer = () => {
     setState(STATE.RUNNING);
