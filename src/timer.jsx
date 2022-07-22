@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 const Timer = ({ duration }) => {
   const startTime = duration;
-  const step = 1;
+  const step = 0.01;
   const STATE = {
     RUNNING: 'running',
     PAUSED: 'paused',
@@ -17,11 +17,14 @@ const Timer = ({ duration }) => {
     const runningTimer = setTimeout(() => {
       if (timer > 0) {
         setTimer(timer - step);
+      } else {
+        setTimer(0);
+        setState(STATE.STOPPED);
       }
     }, step * 1000);
 
     return () => clearTimeout(runningTimer);
-  }, [timer]);
+  }, [timer, STATE.STOPPED]);
 
   const resetTimer = () => {
     setState(STATE.RUNNING);
@@ -49,10 +52,12 @@ const Timer = ({ duration }) => {
   };
 
   const timerDisplay = () => {
+    const display = (val) => val.toFixed(2);
+
     if (state === STATE.RUNNING || state === STATE.STOPPED) {
-      return timer;
+      return display(timer);
     } else if (state === STATE.PAUSED) {
-      return remainingTime;
+      return display(remainingTime);
     }
   };
 
