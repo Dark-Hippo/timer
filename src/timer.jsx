@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-const Timer = () => {
-  const startTime = 5;
+const Timer = ({ duration }) => {
+  const startTime = duration;
   const step = 1;
   const STATE = {
     RUNNING: 'running',
